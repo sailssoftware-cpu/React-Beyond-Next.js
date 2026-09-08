@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Beyond Next.js: Choose Your Stack | Sails Software</title>
+<meta name="description" content="Next.js is not the only React framework. Learn when Vite, React Router v7, or TanStack Start fits better — and how to choose intentionally, not by habit.">
+<meta name="keywords" content="React frameworks 2026, Vite vs Next.js, React Router v7, TanStack Start, React SPA, full-stack React, enterprise React architecture, Next.js alternatives">
+<meta name="author" content="Kishore Barik">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.sailssoftware.com/blog/react-beyond-nextjs">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="article">
+<meta property="og:title"       content="React Beyond Next.js: Choose Your Stack Intentionally | Sails Software">
+<meta property="og:description" content="Next.js became the default React answer. But the ecosystem has grown. Here is how to choose between Vite, React Router v7, and TanStack Start for your next project.">
+<meta property="og:url"         content="https://www.sailssoftware.com/blog/react-beyond-nextjs">
+<meta property="og:image"       content="https://www.sailssoftware.com/wp-content/uploads/react-beyond-nextjs-og.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"    content="React Beyond Next.js - Sails Software Blog">
+<meta property="og:site_name"   content="Sails Software">
+<meta property="article:published_time" content="2026-09-07T00:00:00Z">
+<meta property="article:section" content="Enterprise AI Engineering">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@SailsSoftware">
+<meta name="twitter:title"       content="React Beyond Next.js: Choose Your Stack Intentionally | Sails Software">
+<meta name="twitter:description" content="Next.js is not the only answer. Vite, React Router v7, and TanStack Start each solve different problems. Here is how to choose.">
+<meta name="twitter:image"       content="https://www.sailssoftware.com/wp-content/uploads/react-beyond-nextjs-og.png">
+<meta name="twitter:image:alt"   content="React Beyond Next.js - Sails Software">
+
+<!-- SCHEMA 1: BlogPosting -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "React Beyond Next.js: Choose Your Stack Intentionally",
+  "alternativeHeadline": "Why React App Does Not Automatically Mean Next.js App",
+  "description": "Next.js became the reflex answer for React applications. But the ecosystem has grown. This post covers when Vite, React Router v7, and TanStack Start are better fits — and how to choose intentionally based on what you are actually building.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.sailssoftware.com/wp-content/uploads/react-beyond-nextjs-og.png",
+    "width": 1200,
+    "height": 630
+  },
+  "datePublished": "2026-09-07",
+  "dateModified": "2026-09-07",
+  "wordCount": 1150,
+  "inLanguage": "en-US",
+  "author": {
+    "@type": "Person",
+    "name": "Kishore Barik",
+    "url": "https://www.linkedin.com/in/kishorebarik/",
+    "sameAs": ["https://www.linkedin.com/in/kishorebarik/"],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Sails Software Inc.",
+      "url": "https://www.sailssoftware.com"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sails Software Inc.",
+    "url": "https://www.sailssoftware.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.sailssoftware.com/wp-content/uploads/sails-logo.png",
+      "width": 200,
+      "height": 60
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.sailssoftware.com/blog/react-beyond-nextjs"
+  },
+  "keywords": "React frameworks, Vite React, React Router v7, TanStack Start, Next.js alternatives, enterprise React, SPA vs SSR",
+  "articleSection": "Enterprise Engineering",
+  "about": {
+    "@type": "Thing",
+    "name": "React Framework Selection",
+    "description": "A framework-agnostic decision guide for enterprise engineering teams choosing between Vite, React Router v7, TanStack Start, and Next.js for their React applications."
+  },
+  "mentions": [
+    {"@type": "SoftwareApplication", "name": "Vite"},
+    {"@type": "SoftwareApplication", "name": "React Router v7"},
+    {"@type": "SoftwareApplication", "name": "TanStack Start"},
+    {"@type": "SoftwareApplication", "name": "Next.js"},
+    {"@type": "SoftwareApplication", "name": "TypeScript"}
+  ]
+}
+</script>
+
+<!-- SCHEMA 2: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When should I use Vite instead of Next.js for a React app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use Vite when you do not need server-side rendering. If your app is an admin dashboard, internal tool, SaaS panel, CRM, or any authenticated UI where SEO does not matter and you already have a backend API, Vite gives you faster dev startup, instant HMR, and simpler project structure without the overhead of a full-stack framework."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is React Router v7 Framework Mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "React Router v7 Framework Mode turns the routing library into a full-stack framework. It adds SSR, data loading via loaders, mutations via actions, nested routing, and deployment adapters. Each route owns its own data through a Component + Loader + Action model, keeping logic close to where it is used. It embraces web fundamentals — forms, requests, responses, redirects — rather than abstracting them away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is TanStack Start and how is it different from Next.js?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TanStack Start is a type-safety-first full-stack React framework built on TanStack Router. Unlike Next.js, it does not require Server Components as the core mental model. Instead, it gives you SSR, streaming, and server functions with end-to-end TypeScript safety — routes, params, loaders, and server functions are all fully typed. It is newer than Next.js and still evolving, so teams should evaluate maturity before using it in critical production systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the main reasons to look beyond Next.js?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three common signals: slower dev feedback in large apps as HMR and startup feel heavier than lighter setups like Vite; extra mental overhead from Server Components, server/client boundaries, and server actions that are powerful but not always necessary; and more framework than required when you already have a backend and just need a frontend UI. None of these are deal-breakers — they are signals to pause and ask whether you actually need all of it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose between Vite, React Router v7, and TanStack Start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a simple decision rule: if your app is mostly a SPA with no SSR requirement, choose Vite. If you need a full-stack web framework with web-first philosophy — forms, requests, responses — choose React Router v7. If you need deep TypeScript safety with end-to-end typed routes, loaders, and server functions, evaluate TanStack Start. Next.js remains the right choice for content-heavy sites, SEO-driven apps, large public platforms, and teams already using Vercel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Next.js still a good choice in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Next.js is still excellent for content-heavy sites, SEO-driven applications, large public platforms, teams already on Vercel, and apps built around Server Components. The point is not to avoid Next.js — it is to not default to it blindly when a simpler or better-fitting alternative exists. The best framework is the one that fits your problem, not the one everyone else is using."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- SCHEMA 3: HowTo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Choose the Right React Framework for Your Project",
+  "description": "A decision framework for enterprise engineering teams choosing between Vite, React Router v7, TanStack Start, and Next.js.",
+  "totalTime": "PT15M",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Ask what you are actually building", "text": "Resist the habit of defaulting to a framework. Start with the product: is this an internal tool, a SaaS product, a content site, or a data-heavy authenticated app? The answer determines the right fit.", "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs#how"},
+    {"@type": "HowToStep", "position": 2, "name": "Determine SSR requirement", "text": "If SEO matters and you need public-facing pages indexed by search engines, you need SSR. If this is an authenticated internal app, dashboard, or admin panel, SSR adds complexity without benefit.", "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs#how"},
+    {"@type": "HowToStep", "position": 3, "name": "Check if you already have a backend", "text": "If your backend is already built and your React app only needs to consume its API, a full-stack framework is unnecessary. Vite plus a routing and data-fetching library is sufficient and simpler.", "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs#how"},
+    {"@type": "HowToStep", "position": 4, "name": "Evaluate TypeScript depth requirement", "text": "If your team needs end-to-end type safety from URL params through loaders to server functions, TanStack Start is the strongest option. If TypeScript coverage on the data layer is sufficient, React Router v7 covers it.", "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs#how"},
+    {"@type": "HowToStep", "position": 5, "name": "Apply the decision rule and choose", "text": "No SSR needed → Vite. Full-stack web-first framework needed → React Router v7. Deep TypeScript and end-to-end type safety → TanStack Start. Content-heavy, SEO-driven, or Vercel-hosted → Next.js.", "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs#how"}
+  ]
+}
+</script>
+
+<!-- SCHEMA 4: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sailssoftware.com"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.sailssoftware.com/blog"},
+    {"@type": "ListItem", "position": 3, "name": "React Beyond Next.js", "item": "https://www.sailssoftware.com/blog/react-beyond-nextjs"}
+  ]
+}
+</script>
+
+<!-- SCHEMA 5: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Sails Software Inc.",
+  "url": "https://www.sailssoftware.com",
+  "logo": "https://www.sailssoftware.com/wp-content/uploads/sails-logo.png",
+  "description": "Sails Software is a Michigan-based enterprise AI and digital transformation firm specializing in governed AI deployment for pharma, biotech, BFSI, and medtech companies.",
+  "sameAs": [
+    "https://www.linkedin.com/company/sails-software",
+    "https://twitter.com/SailsSoftware",
+    "https://www.crunchbase.com/organization/sails-software"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@sailssoftware.com",
+    "contactType": "sales"
+  }
+}
+</script>
+
+<!-- SCHEMA 6: Speakable WebPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.sailssoftware.com/blog/react-beyond-nextjs",
+  "name": "React Beyond Next.js: Choose Your Stack Intentionally",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero-headline", ".hero-hook", ".pov-box p", ".tkbox li", ".cf-val"]
+  },
+  "url": "https://www.sailssoftware.com/blog/react-beyond-nextjs"
+}
+</script>
+
+<!-- SCHEMA 7: Person — Kishore Barik -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kishore Barik",
+  "url": "https://www.linkedin.com/in/kishorebarik/",
+  "sameAs": ["https://www.linkedin.com/in/kishorebarik/"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Sails Software Inc.",
+    "url": "https://www.sailssoftware.com"
+  },
+  "knowsAbout": [
+    "Enterprise React Architecture",
+    "Full-Stack JavaScript",
+    "AI-Assisted Software Development",
+    "Enterprise Engineering",
+    "Frontend Architecture"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   PALETTE: #00B9FF (cyan) · #064A70 (navy) · #FFFFFF (white)
+   BG: #000000 page · #061421 hero · #0A1D30 alt · #0D2440 deep
+   Scoped to #sails-react-blog — WordPress / Elementor safe
+════════════════════════════════════════════════════════════ */
+#sails-react-blog*,#sails-react-blog *::before,#sails-react-blog *::after{box-sizing:border-box;margin:0;padding:0}
+#sails-react-blog{
+  --c:    #00B9FF;
+  --n:    #064A70;
+  --w:    #FFFFFF;
+  --bg0:  #000000;
+  --bg1:  #061421;
+  --bg2:  #0A1D30;
+  --bg3:  #0D2440;
+  --bord: rgba(0,185,255,0.15);
+  --bord2:rgba(0,185,255,0.28);
+  --body: rgba(255,255,255,0.82);
+  --mute: rgba(255,255,255,0.48);
+  --r:    12px;
+  --rs:   8px;
+  --mw:   820px;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg0);
+  color:var(--body);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── PROGRESS ── */
+#sails-react-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--c),var(--n));z-index:9999;transition:width .1s linear}
+
+/* ── HERO ── */
+#sails-react-blog .hero{background:var(--bg1);padding:92px 24px 76px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--bord)}
+#sails-react-blog .hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse at center,rgba(0,185,255,.08) 0%,transparent 70%);pointer-events:none}
+#sails-react-blog .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent)}
+
+#sails-react-blog .badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--c);background:rgba(0,185,255,.07);border:1px solid rgba(0,185,255,.22);padding:5px 16px;border-radius:20px;margin-bottom:26px}
+#sails-react-blog .hero-headline{font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:800;color:var(--w);line-height:1.15;max-width:780px;margin:0 auto 20px;text-shadow:0 0 40px rgba(0,185,255,.18)}
+#sails-react-blog .hero-headline em{font-style:normal;color:var(--c)}
+#sails-react-blog .hero-hook{font-size:1.08rem;font-weight:300;color:var(--body);max-width:600px;margin:0 auto 36px;line-height:1.78}
+#sails-react-blog .meta{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+#sails-react-blog .mi{font-size:12px;color:var(--mute);display:flex;align-items:center;gap:5px}
+#sails-react-blog .md{width:1px;height:28px;background:var(--bord)}
+
+/* ── LAYOUT ── */
+#sails-react-blog .wrap{max-width:var(--mw);margin:0 auto;padding:0 24px}
+#sails-react-blog .sec{padding:64px 0;border-bottom:1px solid var(--bord)}
+#sails-react-blog .sec:last-of-type{border-bottom:none}
+#sails-react-blog .alt-bg{background:var(--bg2);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord)}
+
+/* ── SECTION LABEL ── */
+#sails-react-blog .slabel{font-size:9.5px;font-weight:700;letter-spacing:2.8px;text-transform:uppercase;color:var(--c);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+#sails-react-blog .slabel::before{content:'';width:26px;height:2px;background:var(--c);flex-shrink:0}
+
+/* ── TYPOGRAPHY ── */
+#sails-react-blog h2{font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:700;color:var(--w);line-height:1.28;margin-bottom:18px}
+#sails-react-blog h3{font-size:1.05rem;font-weight:600;color:var(--w);margin-bottom:10px;margin-top:30px}
+#sails-react-blog p{margin-bottom:18px;color:var(--body)}
+#sails-react-blog p:last-child{margin-bottom:0}
+#sails-react-blog strong{color:var(--w);font-weight:600}
+#sails-react-blog code{font-family:'Courier New',monospace;font-size:13px;color:var(--c);background:rgba(0,185,255,.08);padding:2px 7px;border-radius:4px;border:1px solid rgba(0,185,255,.18)}
+
+/* ── POV BOX ── */
+#sails-react-blog .pov-box{background:linear-gradient(135deg,rgba(6,74,112,.55),rgba(0,185,255,.08));border:1px solid var(--bord2);border-left:4px solid var(--c);border-radius:var(--r);padding:26px 30px;margin:26px 0;position:relative;overflow:hidden}
+#sails-react-blog .pov-box::before{content:'';position:absolute;top:-20px;right:-20px;width:90px;height:90px;background:radial-gradient(circle,rgba(0,185,255,.07),transparent 70%)}
+#sails-react-blog .pov-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c);margin-bottom:10px}
+#sails-react-blog .pov-box p{font-size:1.04rem;color:var(--w);font-weight:500;line-height:1.72;margin:0;font-style:italic}
+
+/* ── FRAMEWORK CARDS (3-col) ── */
+#sails-react-blog .fw-grid{display:grid;grid-template-columns:1fr;gap:14px;margin:26px 0}
+#sails-react-blog .fw-card{background:rgba(6,74,112,.22);border:1px solid var(--bord);border-radius:var(--r);padding:22px 20px;transition:border-color .22s,background .22s;position:relative;overflow:hidden}
+#sails-react-blog .fw-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c)}
+#sails-react-blog .fw-card:hover{border-color:var(--bord2);background:rgba(6,74,112,.32)}
+#sails-react-blog .fw-name{font-size:14px;font-weight:700;color:var(--c);margin-bottom:8px}
+#sails-react-blog .fw-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute);background:rgba(0,185,255,.06);border:1px solid var(--bord);border-radius:12px;padding:3px 10px;margin-bottom:12px}
+#sails-react-blog .fw-desc{font-size:13px;color:var(--body);line-height:1.6;margin-bottom:14px}
+#sails-react-blog .fw-pros{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
+#sails-react-blog .fw-pros li{font-size:12.5px;color:var(--body);padding-left:16px;position:relative;line-height:1.5}
+#sails-react-blog .fw-pros li::before{content:'▸';position:absolute;left:0;color:var(--c);font-size:9px;top:4px}
+#sails-react-blog .fw-best{margin-top:14px;padding-top:12px;border-top:1px solid var(--bord);font-size:11.5px;color:var(--mute)}
+#sails-react-blog .fw-best strong{color:var(--c);font-size:11px}
+
+/* ── KEY POINTS ── */
+#sails-react-blog .kp{display:flex;gap:13px;margin:14px 0;padding:17px 20px;background:rgba(6,74,112,.20);border-radius:var(--rs);border:1px solid var(--bord);align-items:flex-start;transition:border-color .22s}
+#sails-react-blog .kp:hover{border-color:var(--bord2)}
+#sails-react-blog .kpi{width:32px;height:32px;border-radius:7px;flex-shrink:0;background:rgba(0,185,255,.08);border:1px solid rgba(0,185,255,.28);display:flex;align-items:center;justify-content:center;margin-top:1px}
+#sails-react-blog .kpt strong{display:block;margin-bottom:3px;font-size:14px;color:var(--w)}
+#sails-react-blog .kpt p{font-size:13.5px;color:var(--body);margin:0;line-height:1.58}
+
+/* ── DECISION TREE ── */
+#sails-react-blog .dtree{background:var(--bg3);border:1px solid var(--bord);border-radius:var(--r);padding:28px 30px;margin:26px 0;font-family:'Courier New',monospace;font-size:13.5px;line-height:2;color:var(--body)}
+#sails-react-blog .dtree .dq{color:var(--c);font-weight:700}
+#sails-react-blog .dtree .da{color:var(--w)}
+#sails-react-blog .dtree .darrow{color:var(--w)}
+
+/* ── COMPARISON TABLE ── */
+#sails-react-blog .tw{overflow-x:auto;margin:26px 0;border-radius:var(--r);border:1px solid var(--bord)}
+#sails-react-blog table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px}
+#sails-react-blog thead tr{background:linear-gradient(90deg,var(--n),rgba(0,185,255,.25))}
+#sails-react-blog th{padding:13px 16px;text-align:left;font-weight:600;color:var(--w);font-size:12px;border-bottom:1px solid var(--bord2)}
+#sails-react-blog th:first-child{color:var(--c)}
+#sails-react-blog td{padding:12px 16px;border-bottom:1px solid var(--bord);color:var(--body);vertical-align:middle;line-height:1.5;text-align:center}
+#sails-react-blog td:first-child{text-align:left;font-weight:600;color:rgba(255,255,255,.75)}
+#sails-react-blog tr:last-child td{border-bottom:none}
+#sails-react-blog tbody tr:nth-child(odd) td{background:rgba(6,74,112,.18)}
+#sails-react-blog tbody tr:nth-child(even) td{background:rgba(6,74,112,.07)}
+#sails-react-blog tbody tr:hover td{background:rgba(0,185,255,.06)}
+
+/* ── IMPLICATIONS ── */
+#sails-react-blog .ilist{margin:16px 0;display:flex;flex-direction:column;gap:8px}
+#sails-react-blog .ii{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;background:rgba(6,74,112,.18);border:1px solid var(--bord);border-radius:var(--rs)}
+#sails-react-blog .inum{font-size:10.5px;font-weight:800;color:var(--c);background:rgba(0,185,255,.10);border:1px solid rgba(0,185,255,.20);border-radius:5px;padding:2px 8px;flex-shrink:0;margin-top:1px;letter-spacing:.5px}
+#sails-react-blog .itext{font-size:14px;color:var(--body);line-height:1.62}
+#sails-react-blog .itext strong{color:var(--w)}
+
+/* ── COE PERSPECTIVE CARD ── */
+#sails-react-blog .coe-card{background:linear-gradient(135deg,rgba(6,74,112,.55),rgba(0,185,255,.07));border:1px solid var(--bord2);border-radius:var(--r);padding:28px 30px;margin:30px 0}
+#sails-react-blog .cc-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c);display:flex;align-items:center;gap:8px;margin-bottom:20px}
+#sails-react-blog .cc-title::before{content:'';width:22px;height:2px;background:var(--c)}
+#sails-react-blog .cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#sails-react-blog .cf-item{display:flex;flex-direction:column;gap:5px;padding:16px;background:rgba(0,0,0,.25);border-radius:var(--rs);border:1px solid var(--bord)}
+#sails-react-blog .cf-lbl{font-size:8.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--mute)}
+#sails-react-blog .cf-val{font-size:13.5px;color:var(--w);line-height:1.55}
+
+/* ── TAKEAWAY BOX ── */
+#sails-react-blog .tkbox{background:var(--n);border:1px solid var(--bord2);border-radius:var(--r);padding:26px 28px;margin:26px 0}
+#sails-react-blog .tktitle{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c);margin-bottom:14px}
+#sails-react-blog .tkbox ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+#sails-react-blog .tkbox li{padding-left:20px;position:relative;font-size:14px;color:var(--w);line-height:1.65}
+#sails-react-blog .tkbox li::before{content:'▸';position:absolute;left:0;color:var(--c);font-size:10px;top:4px}
+
+/* ── FAQ ── */
+#sails-react-blog .faq{margin:24px 0;display:flex;flex-direction:column;gap:6px}
+#sails-react-blog details{background:rgba(6,74,112,.18);border:1px solid var(--bord);border-radius:var(--rs);overflow:hidden;transition:border-color .22s}
+#sails-react-blog details[open]{border-color:var(--bord2)}
+#sails-react-blog summary{padding:16px 20px;cursor:pointer;font-weight:600;color:var(--w);font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+#sails-react-blog summary::-webkit-details-marker{display:none}
+#sails-react-blog .fq-icon{width:22px;height:22px;border-radius:50%;background:var(--n);border:1px solid var(--bord2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .22s}
+#sails-react-blog details[open] .fq-icon{background:var(--c)}
+#sails-react-blog .fq-icon svg{transition:transform .22s}
+#sails-react-blog details[open] .fq-icon svg{transform:rotate(45deg)}
+#sails-react-blog .fa{padding:0 20px 18px;font-size:14px;color:var(--body);line-height:1.7}
+
+/* ── CTA ── */
+#sails-react-blog .cta-sec{background:linear-gradient(135deg,var(--bg2),var(--bg1));border-top:1px solid var(--bord);padding:74px 24px;text-align:center;position:relative;isolation:isolate}
+
+#sails-react-blog .cta-blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:280px;background:radial-gradient(ellipse,rgba(6,74,112,.4),transparent 70%);pointer-events:none;z-index:0}
+#sails-react-blog .cta-sec h2{font-size:clamp(1.5rem,2.8vw,2rem);max-width:580px;margin:0 auto 14px;color:var(--w);position:relative;z-index:1}
+#sails-react-blog .cta-sec p{max-width:480px;margin:0 auto 30px;color:var(--body);position:relative;z-index:1}
+#sails-react-blog .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:10}
+#sails-react-blog .bp{display:inline-flex;align-items:center;gap:8px;background:var(--c);color:var(--bg0);padding:13px 28px;border-radius:var(--rs);font-size:14.5px;font-weight:700;text-decoration:none;transition:opacity .2s,transform .2s;box-shadow:0 4px 20px rgba(0,185,255,.3);position:relative;z-index:10;cursor:pointer}
+#sails-react-blog .bp:hover{opacity:.88;transform:translateY(-2px)}
+#sails-react-blog .bs{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--w);padding:13px 28px;border-radius:var(--rs);font-size:14.5px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.30);transition:border-color .2s,background .2s;position:relative;z-index:10;cursor:pointer}
+#sails-react-blog .bs:hover{border-color:var(--w);background:rgba(255,255,255,.06)}
+
+/* ── SCROLL REVEAL ── */
+#sails-react-blog .reveal{opacity:1;transform:translateY(0);transition:opacity .5s ease,transform .5s ease}
+#sails-react-blog .reveal.jr{opacity:0;transform:translateY(24px)}
+#sails-react-blog .reveal.vis{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){#sails-react-blog .reveal{transition:none!important}}
+
+/* ── AUTHOR ── */
+#sails-react-blog .author-section{background:var(--bg2);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);padding:48px 24px}
+#sails-react-blog .author-wrap{max-width:var(--mw);margin:0 auto;display:flex;gap:24px;align-items:center}
+#sails-react-blog .author-avatar{width:80px;height:80px;border-radius:50%;background:var(--n);border:2px solid var(--bord2);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden;padding:0}
+#sails-react-blog .author-avatar::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(0,185,255,.18)}
+#sails-react-blog .author-info{flex:1}
+#sails-react-blog .author-role{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c);margin-bottom:4px}
+#sails-react-blog .author-name{font-size:1.15rem;font-weight:700;color:var(--w);margin-bottom:4px}
+#sails-react-blog .author-title{font-size:13px;color:var(--mute);margin-bottom:12px}
+#sails-react-blog .author-bio{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px}
+#sails-react-blog .author-links{display:flex;gap:10px;flex-wrap:wrap}
+#sails-react-blog .author-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--c);text-decoration:none;background:rgba(0,185,255,.07);border:1px solid rgba(0,185,255,.22);padding:5px 14px;border-radius:20px;transition:background .2s,border-color .2s}
+#sails-react-blog .author-link:hover{background:rgba(0,185,255,.14);border-color:rgba(0,185,255,.40)}
+
+/* ── CHIPS ── */
+#sails-react-blog .chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+#sails-react-blog .chip{font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px;border:1px solid rgba(0,185,255,.28);background:rgba(0,185,255,.07);color:var(--c)}
+#sails-react-blog .chip.n{border-color:rgba(6,74,112,.6);background:rgba(6,74,112,.22);color:rgba(255,255,255,.65)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  #sails-react-blog .cc-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  #sails-react-blog .hero{padding:66px 20px 52px}
+  #sails-react-blog .sec{padding:50px 0}
+  #sails-react-blog .wrap{padding:0 20px}
+  #sails-react-blog .md{display:none}
+  #sails-react-blog .author-wrap{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  #sails-react-blog{font-size:15px}
+  #sails-react-blog .hero{padding:50px 16px 42px}
+  #sails-react-blog .wrap{padding:0 16px}
+  #sails-react-blog .sec{padding:38px 0}
+  #sails-react-blog .cta-btns{flex-direction:column;align-items:center;max-width:260px;margin:0 auto}
+  #sails-react-blog .bp,#sails-react-blog .bs{width:100%;justify-content:center}
+  #sails-react-blog .author-avatar{width:68px;height:68px}
+}
+</style>
+</head>
+<body>
+
+<div id="sails-react-progress"></div>
+<div id="sails-react-blog">
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="badge">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    AI CoE Blog &nbsp;·&nbsp; Enterprise Engineering
+  </div>
+  <h1 class="hero-headline">React Beyond<br><em>Next.js</em></h1>
+  <p class="hero-hook">Next.js became the default answer for React applications. But the ecosystem has grown — and "React app" no longer has to mean "Next.js app." Here is how to choose intentionally, not by habit.</p>
+  <div class="meta">
+    <div class="mi"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>React · Frontend Architecture</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ══ S1: THE PROBLEM ══ -->
+<div class="wrap"><section class="sec reveal" id="problem">
+  <div class="slabel">The Problem</div>
+  <h2>Next.js Became a Habit — Not Always a Decision</h2>
+
+  <p>There was a time when starting a React app meant assembling your own stack — bundler, router, data fetching, architecture. Then Next.js became the default answer. Today, "we're building a React app" is often followed immediately by "let's use Next.js." Sometimes that is the right call. More often, it is just habit.</p>
+
+  <p>Next.js is powerful and widely adopted, but power is not the same as fit. Three common signals that a team has reached for more framework than they actually need:</p>
+
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+    <div class="kpt"><strong>Slower feedback in large apps</strong><p>As projects grow, dev startup and HMR feel heavier in Next.js compared to lighter setups like Vite — adding friction to every development cycle.</p></div>
+  </div>
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+    <div class="kpt"><strong>Extra mental overhead</strong><p>Server Components, server/client boundaries, and server actions are powerful concepts — but not always necessary for the problem at hand. Complexity has a cost.</p></div>
+  </div>
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+    <div class="kpt"><strong>More framework than required</strong><p>If you already have a backend and just need a frontend UI, a full-stack framework can feel like overkill — bringing infrastructure decisions that belong elsewhere.</p></div>
+  </div>
+
+  <p style="margin-top:20px">None of these are deal-breakers in isolation. They are signals to pause and ask: <em>do we actually need all of this?</em></p>
+</section></div>
+
+<!-- ══ S2: THE INSIGHT ══ -->
+<div class="alt-bg"><div class="wrap"><section class="sec reveal" id="insight">
+  <div class="slabel">The Insight</div>
+  <h2>The Right Framework Is the One That Fits Your Problem</h2>
+
+  <p>The React ecosystem is mature enough that there is no longer one "default" framework. Three strong alternatives have emerged, each solving a different class of problem:</p>
+
+  <div class="chips">
+    <div class="chip">Vite + React</div>
+    <div class="chip">React Router v7</div>
+    <div class="chip">TanStack Start</div>
+    <div class="chip n">Next.js still valid for its use case</div>
+  </div>
+
+  <div class="pov-box">
+    <div class="pov-label">AI CoE Point of View</div>
+    <p>Our point of view is: framework selection is an architectural decision that should follow the shape of your product — not the habits of your industry. Choosing a framework because it is popular is the same mistake as choosing a database because it trended on Hacker News. The question is never "what is the best framework?" It is "what am I actually building?"</p>
+  </div>
+
+  <p>Think of the ecosystem in two buckets based on what you need:</p>
+
+  <div class="fw-grid">
+    <div class="fw-card reveal">
+      <div class="fw-name">Vite + React</div>
+      <div class="fw-tag">SPA · No SSR</div>
+      <div class="fw-desc">A build tool, not a framework. Gives you fast dev startup, instant HMR, and complete freedom over architecture choices.</div>
+      <ul class="fw-pros">
+        <li>Sub-second dev startup</li>
+        <li>Instant hot module replacement</li>
+        <li>Simple project structure</li>
+        <li>Full library flexibility</li>
+      </ul>
+      <div class="fw-best"><strong>Best for:</strong> Admin dashboards, internal tools, SaaS panels, authenticated UIs where SEO does not matter</div>
+    </div>
+    <div class="fw-card reveal">
+      <div class="fw-name">React Router v7</div>
+      <div class="fw-tag">Full-Stack · Web-First</div>
+      <div class="fw-desc">Framework Mode turns the routing library into a full-stack framework. Routes own their data. Web fundamentals are embraced, not abstracted.</div>
+      <ul class="fw-pros">
+        <li>SSR, streaming, static rendering</li>
+        <li>Loader + Action per route</li>
+        <li>Nested routing built-in</li>
+        <li>Deployment adapters</li>
+      </ul>
+      <div class="fw-best"><strong>Best for:</strong> SaaS products, e-commerce, portals, form-heavy and content-heavy apps</div>
+    </div>
+    <div class="fw-card reveal">
+      <div class="fw-name">TanStack Start</div>
+      <div class="fw-tag">Full-Stack · Type-Safe</div>
+      <div class="fw-desc">Type-safety-first full-stack React. Routes, params, loaders, and server functions are all fully typed. No Server Components required.</div>
+      <ul class="fw-pros">
+        <li>End-to-end TypeScript safety</li>
+        <li>Server functions (no REST layer needed)</li>
+        <li>SSR without Server Components</li>
+        <li>Typed URL params and search params</li>
+      </ul>
+      <div class="fw-best"><strong>Best for:</strong> Large TypeScript teams, complex SaaS systems — note: still maturing, evaluate before critical production use</div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ══ S3: HOW IT WORKS ══ -->
+<div class="wrap"><section class="sec reveal" id="how">
+  <div class="slabel">How It Works</div>
+  <h2>A Simple Decision Framework for Choosing Your Stack</h2>
+
+  <p>Forget "best framework." Ask a simpler question: <strong>what am I actually building?</strong> Five questions that route you to the right answer:</p>
+
+  <div class="dtree reveal">
+    <div><span class="dq">1. Do I need SSR or public SEO?</span></div>
+    <div><span class="darrow">   └ No  →</span> <span class="da">Vite + React. Stop here.</span></div>
+    <div><span class="darrow">   └ Yes →</span> <span class="da">Continue below.</span></div>
+    <br>
+    <div><span class="dq">2. Do I already have a backend API?</span></div>
+    <div><span class="darrow">   └ Yes →</span> <span class="da">Vite. You don't need a full-stack framework.</span></div>
+    <div><span class="darrow">   └ No  →</span> <span class="da">Continue below.</span></div>
+    <br>
+    <div><span class="dq">3. Is web-first architecture (forms, requests, redirects) the right mental model?</span></div>
+    <div><span class="darrow">   └ Yes →</span> <span class="da">React Router v7 Framework Mode.</span></div>
+    <div><span class="darrow">   └ No  →</span> <span class="da">Continue below.</span></div>
+    <br>
+    <div><span class="dq">4. Do I need end-to-end TypeScript safety across routes and server functions?</span></div>
+    <div><span class="darrow">   └ Yes →</span> <span class="da">Evaluate TanStack Start (check maturity for your use case).</span></div>
+    <br>
+    <div><span class="dq">5. Is this content-heavy, SEO-driven, or already on Vercel?</span></div>
+    <div><span class="darrow">   └ Yes →</span> <span class="da">Next.js remains the right choice.</span></div>
+  </div>
+
+  <h3>The Quick Comparison</h3>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>Need</th>
+          <th>Vite</th>
+          <th>React Router v7</th>
+          <th>TanStack Start</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Simple SPA</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐</td></tr>
+        <tr><td>Internal tools</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+        <tr><td>SaaS apps</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+        <tr><td>SEO / Public pages</td><td>⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+        <tr><td>SSR / Streaming</td><td>—</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+        <tr><td>TypeScript safety</td><td>⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td></tr>
+        <tr><td>Dev simplicity</td><td>⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐</td></tr>
+        <tr><td>Ecosystem maturity</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section></div>
+
+<!-- ══ S4: REAL-WORLD EXAMPLE ══ -->
+<div class="alt-bg"><div class="wrap"><section class="sec reveal" id="example">
+  <div class="slabel">Real-World Example</div>
+  <h2>Two Teams, Same Technology, Different Right Answers</h2>
+
+  <p>The framework choice becomes concrete when you put it next to a real product decision. Here are two scenarios from the same React codebase family, with genuinely different right answers:</p>
+
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="kpt"><strong>Scenario A — Internal Analytics Dashboard</strong><p>A fintech team building an authenticated reporting UI for internal analysts. No public pages, no SEO requirement, complex data visualisations, an existing REST API. <strong>Right choice: Vite + React + TanStack Query.</strong> Adding SSR would be pure overhead — faster build, simpler mental model, no framework migration risk.</p></div>
+  </div>
+
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="kpt"><strong>Scenario B — Customer-Facing SaaS Portal</strong><p>A healthcare startup building a patient-facing portal with public marketing pages, authenticated dashboards, form-heavy workflows, and SSR requirements for initial load performance. <strong>Right choice: React Router v7 Framework Mode.</strong> Each route owns its loader and action, SSR is native, and the web-first model maps directly to their form-heavy UX.</p></div>
+  </div>
+
+  <div class="kp reveal">
+    <div class="kpi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00B9FF" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="kpt"><strong>Scenario C — Large TypeScript SaaS Platform</strong><p>An enterprise team with 20+ engineers, strict TypeScript standards, a complex routing hierarchy, and internal server operations that need to stay type-safe from URL to database. <strong>Right choice: TanStack Start</strong> — with the caveat to evaluate ecosystem maturity for their specific production risk tolerance before committing.</p></div>
+  </div>
+
+  <div class="pov-box" style="margin-top:26px">
+    <div class="pov-label">The Pattern</div>
+    <p>In each case, the correct answer was determined by the shape of the product — not the popularity of the framework. Two of these three scenarios would have reached for Next.js by default and introduced unnecessary complexity. The discipline is asking the question before running <code>npx create-next-app</code>.</p>
+  </div>
+</section></div></div>
+
+<!-- ══ S5: IMPLICATIONS ══ -->
+<div class="wrap"><section class="sec reveal" id="implications">
+  <div class="slabel">What This Means for Enterprises</div>
+  <h2>Four Implications for Engineering Leaders</h2>
+
+  <div class="ilist">
+    <div class="ii reveal">
+      <div class="inum">01</div>
+      <div class="itext"><strong>Framework selection is an architectural decision, not a default.</strong> Treat it with the same deliberateness as choosing a database or a deployment model. Write down what you are building, what constraints you have, and what the framework needs to do — before selecting it.</div>
+    </div>
+    <div class="ii reveal">
+      <div class="inum">02</div>
+      <div class="itext"><strong>Simplicity is a feature.</strong> Vite gives experienced teams full control with minimum overhead. But that freedom also means the team owns every architectural decision. It is a great fit for teams with strong conventions — and a risk for teams that have not established them yet.</div>
+    </div>
+    <div class="ii reveal">
+      <div class="inum">03</div>
+      <div class="itext"><strong>Evaluate maturity before production commitment.</strong> TanStack Start is powerful but still evolving. For teams considering it, run a non-critical service through it first. Ecosystem maturity — available adapters, community solutions, deployment patterns — matters as much as technical capability for a production stack.</div>
+    </div>
+    <div class="ii reveal">
+      <div class="inum">04</div>
+      <div class="itext"><strong>Next.js is still the right answer — sometimes.</strong> Content-heavy sites, SEO-driven apps, large public platforms, and teams already on Vercel have clear reasons to choose Next.js. The goal is intentionality, not avoiding it. The worst outcome is choosing any framework without asking why.</div>
+    </div>
+  </div>
+
+  <!-- CoE Card -->
+  <div class="coe-card reveal">
+    <div class="cc-title">AI CoE Perspective</div>
+    <div class="cc-grid">
+      <div class="cf-item">
+        <div class="cf-lbl">The Takeaway</div>
+        <div class="cf-val">The React ecosystem is mature enough that every team has the right tool for their problem. The decision should follow the product shape — not convention.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-lbl">Where to Start</div>
+        <div class="cf-val">Before your next React project, answer five questions in writing: SSR needed? Existing backend? Web-first model? TypeScript depth required? Content or app? The framework choice follows from the answers.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-lbl">What to Measure</div>
+        <div class="cf-val">Dev startup time, HMR speed, onboarding time for new engineers, and the number of framework-specific concepts a developer must learn before shipping their first feature.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-lbl">What to Watch</div>
+        <div class="cf-val">TanStack Start ecosystem maturity. If it stabilises as expected, it may become the go-to for TypeScript-heavy enterprise applications within the next 12–18 months.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Takeaways -->
+  <div class="tkbox reveal">
+    <div class="tktitle">Key Takeaways</div>
+    <ul>
+      <li>If you do not need SSR, you probably do not need a full-stack framework. Vite gives you a fast, simple, flexible foundation that is often exactly enough.</li>
+      <li>React Router v7 Framework Mode and TanStack Start are both production-ready alternatives to Next.js for full-stack React — each with different philosophies. Match the philosophy to your team's mental model.</li>
+      <li>The best framework is the one that fits your problem, not the one everyone else is using. Write down what you are building before you pick the tool that builds it.</li>
+    </ul>
+  </div>
+</section></div>
+
+<!-- ══ FAQ ══ -->
+<div class="alt-bg"><div class="wrap"><section class="sec reveal" id="faq">
+  <div class="slabel">Frequently Asked Questions</div>
+  <h2>Questions Teams Ask When Evaluating React Frameworks</h2>
+
+  <div class="faq">
+    <details>
+      <summary>When should I use Vite instead of Next.js?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">Use Vite when you do not need server-side rendering. Admin dashboards, internal tools, SaaS panels, CRM systems, and authenticated UIs where SEO does not matter are ideal Vite targets. You already have APIs, most logic is client-side, and adding SSR or Server Components would introduce complexity without real benefit.</div>
+    </details>
+    <details>
+      <summary>What is React Router v7 Framework Mode?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">Framework Mode transforms React Router from a routing library into a full-stack framework. It adds SSR, data loading via loaders, mutations via actions, nested routing, and deployment adapters. Each route defines its own data needs through a Component + Loader + Action model — keeping logic close to where it is used and leaning into web fundamentals.</div>
+    </details>
+    <details>
+      <summary>What is TanStack Start and how is it different from Next.js?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">TanStack Start is type-safety-first full-stack React built on TanStack Router. Unlike Next.js, it does not require Server Components as the core mental model. Routes, params, loaders, and server functions are all fully typed. It gives you SSR and streaming without restructuring your component thinking. It is newer and still evolving — evaluate maturity before critical production use.</div>
+    </details>
+    <details>
+      <summary>What are the main reasons to look beyond Next.js?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">Three common signals: slower dev feedback as HMR and startup feel heavier in large Next.js projects; extra mental overhead from Server Components and server/client boundaries that are powerful but not always necessary; and more framework than required when you already have a backend and just need a frontend UI. These are signals to pause, not reasons to avoid Next.js entirely.</div>
+    </details>
+    <details>
+      <summary>How do I choose between Vite, React Router v7, and TanStack Start?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">Use a simple decision rule: no SSR requirement → Vite. Full-stack web-first framework with forms, loaders, and actions → React Router v7. End-to-end TypeScript safety from URL params through server functions → TanStack Start. Content-heavy, SEO-driven, or Vercel-hosted → Next.js. The answer flows from what you are building, not from what is popular.</div>
+    </details>
+    <details>
+      <summary>Is Next.js still a good choice in 2026?
+        <div class="fq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </summary>
+      <div class="fa">Yes. Next.js is still excellent for content-heavy sites, SEO-driven applications, large public platforms, teams on Vercel, and apps built around Server Components. The point is not to avoid Next.js — it is to not default to it without asking why. The best framework is the one that fits your problem, not the one everyone else is using.</div>
+    </details>
+  </div>
+</section></div></div>
+
+</main>
+
+<!-- ══ AUTHOR ══ -->
+<div class="author-section">
+  <div class="author-wrap">
+    <div class="author-avatar" aria-label="Kishore Barik"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCACWAJYDASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAUDBAYHCAIBCf/EAD8QAAIBAwMCAwUGAwYFBQAAAAECAwAEEQUSIQYxE0FRBwgiYXEUMoGRobEVQsEjUmJy4fAlM4PC0lOCotHx/8QAGwEAAQUBAQAAAAAAAAAAAAAAAAECAwQGBQf/xAAtEQACAgEDAwEHBAMAAAAAAAAAAQIDEQQhMQUSQfATIzJRYXGRM8HR4QYisf/aAAwDAQACEQMRAD8A/P8ApSlAClKUAKUpQApSlAClKqxW1xPgxQuwJ27sfCD8z2HegClSpKLR5MZuJREfJVG8/vj9a9/wmDPxX2P+nn+tGBcMiqVKT6HcpbNcWzrcxDHCAh/rt/1+dRdAmBSlKAFKUoAUpSgBSlKAFKUoAUpSgBSlXenRLLdlpAjJGpcq3n5D9SDQBfQWMNvZxvPayNdl2BVmBXaQNo2YyGB3ZyT3HAIObmIzSzLbQ7XwOT2VcemPIVTZ2e2kIBJzlSfMef4VMafouov02b+z0y+nt2fbJcJAzR7v7u4DuPX50OUY8sljXKXwrJb20EIjkDxm5mHdQ+Ag9RjvVH7FuudwuN6Yyyvz+tS+jdIdSakJls9OnkaVgFKoQF+ZPlV/P0H7Q47p7Wz6evL1ogpd4LcuyqeQGwOxx+OKjeoqTw5IlWluayoshFlaJPEhiJI+IsCV+HOO31/erDUdJ/iDm8sY0ic5MkbtjcfLHlk81P6l0r1pZKranotzZrjdtkiZGYeuCM+WKhrMyvFJbqoRieTn7tPhbGfwvIyyqcNprBi8kckUhjlRkcd1YYIrzUnq0RAhlfPiHcjnHfGME/Pn9KjKUhawKUpQIKUpQApSlAClKUAKUpQAq+0td9xKvkYjn8xVXp3Q7vqXqqw0KymtoJbyYRfaLqTw4Lde7Syv/JEihndzwqqzHgVvjX/Yjd9Jeym01RoQJxLGkrPbJHJKXY/fJeQiRDIiFY2WMqqnazBnMNl8K5RjLy8FrT6Wy5SlBbRWWTfsL6dsJOnbm7udKimaVtjSzxhxxztGeK6V6TsrWOOC3ito441GEjRQqr9B2rV1nJpnRXSVla3UgtbG1iSN3ClviPc4Hc5ya2f0Jr/TGtTRHT9espS4BEbTKkn0Kk5rJa1WX3OaWxudJGvTUxqbWcGxk6U0meAZs4Cx7/CBn8vKqMnT9pp1uy2UCQljuYIAAT68VkMKCKBSsgcEeRzVteRTMpkjySBnGKfOqPbwELX3cms+p7SOe2ZLuFGbPDOuT/8AlcQe1fQU6Z6zuDHbKLW4JePaMD5/7+YrtjrG4uTKw2spB+Ly4rmj25GxuOjsXAC3DSboGI5yO+PwpelWyr1CS4ewzq+njZpXJ8rc5uupVaxnX72QpBbyO4f0qJq9ui1vCIP5nG5sjyzwP0qyrX5MDLkUpSgaKUpQApSlAClKUAKUpQBlXs8Wybq68GoTzQxfwPWCrRHBMg025Ma9jwX2g/Inkdx3j1NqVhqnQFrp91MJJp72JxD3JWL+1JOfLcF5r8/+kepbjpLq+21uC2iu41SW2urSUlUuraaJ4LiBmHxKJIZJIyykMu/KlWAI6r6e9odh1vpekvawR/abKJvHmjlQeMW2qP7EMXiIAOQ3GchGkUbzy9fRKU42Lhfbb9/2+WN86Dod8YKytvd4/v8A6bNvumJ9X6FlltHMd8AXjfaH5x2w3Fa+k9mw1rWi9/rOm29mtvugZ7FVvVuQgGxvDVPgL5JbcSq8bSea310ZJFcWcaTbSoHb5VlOqwWtho0t3uRSFIQKoLMTwAPPJNcLT3Try0aa+iNuFI177NH6ws2uNG1a5jle3iV1kSQsNoHY+mMVDdXe2Dqy1ury26d068uvs8chaZbdniUJy75APwrg5PYVl/Ttrc2+mX12YSjupDeo+pqH6cstRutNvo7S4ltyszRk43BSR8Ssvmpz2+dR12LvzPgms079m1Hk0/J7Yur9Utmur7SOn9Sjxsk/hV2fFTt3jfDA8jy8xWB+1sXGt9PaLb2VpPPdTXTNFbquZGXw8lcevat73HsttozbQ3unabbaZp7PLbW9jF4QVnxvbsDzgcfIelYwbDRpOrp7q/uGtLLT7KdmlWQRiJSBuJf+UYXk5HGeat131xt7648FOWlslS6rJ8+mcVaxY3tlqkgvLO5thIzmIToyllWRozjcqkgMjL2HKkYBBAj6zD2k3OnXHWP/AA97okLJJOlwxPgvLcSziIAk7WRJUR14AlWXv95sPrUQeUmzCXQUJuK8ClKU4iFKUoAUpSgBSlKAFKUoAVt72RapBDqMMUcBgb7MIWlEYQSyJLI5OR98hZYhk8jIHbFanS1ndFbaqKw3K0jBAw3bcgsRnn07YPoa2d7Mel9VvuoxbWs7loLee6RcYEZ2qNxB7ZZYx64xnHYOnRKVcm9klkm0lqV8FHd5OwdM6jk07o+51RV+K2t2mZRztVef2rDLX21a91tbtpem9Gy3iFgDKbsxkMDnOR27dxWJaL1/dSaeNDVIoJpc210JuWiXs2R6/wC+a3Fq3SmntDba9baIuo20EKB4LZV8Tw1H8nr64BzWTVMaW1ZHdvY3NdzvklCeEudiyufaD1J0r0X4M8U+nRXEhVra5tpLmaHaATIGJAeM7gASc5yOayb2Y9Vafqeg3WqRazZ3sk8gEiwwmExsBjDISSG9axG81/onqHSFToi86ihlxiS0uUk2ccEbHUrjPzrANK6B1Pp32jWOoxarDbQ3KyT3UKJ4QVUxngMQclh3p11cN45xJE/dOtRlGSnGX5X1N69bdRCPTzs5GMFh5DFc2691dpNr03qdxPr1rBdXUgLWhuBHI1rGd0i8EOGlAeJCvO5gfhALrM+032i21vp0qfaAEUEKxPfy5H+81ytrmvXWtzoZWIiRmdY8AAM2MngcnaqLk8kIv0Emg0Upx7pbZKXUeqw07xDlfyvxtncjbi4nu7uW6up5J55nMkksrFmdiclmJ5JJOSTVOlK0hh223lilKUCClKUAKUrINB6dGoxm6unZLdRxsxuJ8hyCAeMkHyI4+IET6fTyvl2x9evW2Rk5qCyyDhgnuZ1ht4ZJpW7JGpZj58AVWg0+7uQTBE0gC7iYwXx3wDtzgnHGcVmVrpthDbqkdr4oGcG4O8cnk7fug8AZAHapN2uriYyTyu7sSSzHknzrp19Kyv8AZlWWq32MTj6Tm2AzTLFkAESEBlOeSAu4MMduVOfTzlrDQrO1bdkzOSpGxdgG3sQxy6nPOVYZ44xUwtsO+Kr7BGpPy710K9BVDwVp3yksMjltoLVdtvbxRcAEovfHbJ8z8zW6/di08an7VdW0oLumu9AvkhHrIvhyL+qVqKeEpAgI+JjuP1rbXuzaidE95zpSdyFFzPJaH/qRMo/+W2namhTplDHKZJpLnC+Es+USPta9m15DGnXHSqM4kIkngUZ3kc5PzH6iofpH223Gn2sFteXLBIm3NDIeC+MYH+EEdq656h0SPQestR0WS2WTTro/areNxkNE5Jx/7W3L+A9a0p1l7veja/eS3uiTx2k7nJWUYB+vGD9eDXlkNSqpPT6lZ7Xyej2aaVmL9O8N/h/2Qg9u0MOjpI8Fq8jbj4Sg7IiSe4/WtV6/7UtZ6l6nH2GGWWVl8GKG3XnBOcACspX3aOoftQW5mtkgU/eSQHj6Zrbfso9jvTmldbwac1uk4ghe+1CbOW8GMA7S3kGYquB6mp4WaaVijSu6Uthrq1Tjm6SjFfI416oW7udXudO1OcSyx4V1jfKxydyoI744B8sg+lQTdNLPb+JZtIXPPhuRkcdh2ByT6rgD+Ymsl1nbP1JeXaIqCa4klCqMAbnLYH51Vt4trEeTDcP616BR06tQVclwYDU6uU7HNeTXtzpd9asqyW8mWTxANjKSoGSdpAOBggnGMqeTirOtqyRRyxiK4hiuEB3BJkDjPrzVE6PoN0tw99aTyzMgMLPKWXxAygtKSPEdfDDqEWRAG2Nk7SrV7ulSW9bGx1fzRrClZLN0feoCyMpUKvxxkyrnkNkAB++MAI3fk8E1jrwyRorsh2NwGHIJwCRn1AYZHlnmuZbROrHesZLcbIyeEzxSlKiHnpEaSRUXGScDJAH4k9q2jp8Ii01IUBClywDA7gufgB3c5CbV57YA8qwbphYH1yJZEZ5N2V9AArNn1B3BP1ByDWe28nh3ib/uSEc/Ou/0mlKDsfnY5+rm89p4trcCBG+vH41drCAew5qtFGFQJjkMw/U1WCgn+tdpRKDkWxjweaoS+KR/ZhdwIbD9j8qkGUdsdqt8YvI1ZMowI58jjI/Y0rQJlKIS3Tb5bdogvqwZT9D3P5Csm6Gv/wCC+1HpzVA2PsuqWsxJ9BMuf0zUPkkEV5DmGUTrw0eHB+nI/akcdsDoyxJM/ULrzRLfqG0itLKULrVkxnt8DI2Hhkc+QbAx55APbNa1m0++e2DrFnjkfOtvaRb28+iWup2TLby30MVxJNjdvZo1+JueSRxmoDqfp+40qzuddgZWiRmnuY1JwATyyg9sckj8a8z63032vvocrn19D0nputjX7tvZ8GsLq1vLeykaS3kZsHhVqb03RH6L937rLqrUCiateabPO6hstbxLExijPoSW3n6j0qnHr8M+v6ZHJbS3cEl3GHt40LO67hnC9yPP6Cpv3j7hdP8Adk6uu1fDvbLbb1x8fiyou36YJNRf43oou32r5Twh/WtW41dn0z+D80Lm0Zo1YAnaAD+VffhW08RmVCnO5jgCpFeWJ+dW0lhbm6NwIy7eQc5C/T0r0/t8o807vmeBhkBHYjPNChx25r2uHcqD2OMDyNXAhOAcc0uMjclkUde2QaoyW9tfXSRX1uspKMPEBKPtwRt3Lg7fiORnBzUoYhmrVowNQj9BG5/amSrTWGOjI1fqlnHYX5tkkLMmQ4KFcEEgHnvuAVuOPix5UrIepdMur2+iksrV53mUuFiXLfDhWJ4zjHh45wOeOaVmNRpLfaS7YtrPhfwdiuacVkkenNOWy077QAxkdSnxLtOePEHrwwC4PmhI+9UztEloWjBceQHf6fUV9jWJAkEY2xooRBknAHlk16kilgcz26CQ95ISeHHqPRh61paalXBRXg5E5ZZd2commlXPfEgz8xz+oNXYX1AqLt7qGTU7eWAnY6srAjBB74Pz71Lgg58qsweSKR4KA8jvVvcR7Y/FHdCH/Krv5D8a+MoIKnsac1kTJSKgHIwaMA0ZUgcjFIQfBAPdfhP4cV7I5BpPAp+nfsuvBqXsO6PvGO7xtFtS3zIiUH9qy/ZFPbPb3CCRGUo6ns6kYOfw4Naq93W/a892TpDectFZNED6hJXXH4YraMg8SIKpI3cZHcCsndHE5L6mspblGLMP6P6It+lr291DULmCWcyPFaOTjwrfPw9/5iMZ+n1rV/ve6qIfd3WztXZo7zVLaOQ4wuF3vgepJUfLit+w2FnbYMcEQlJyZNo3H8e9c1++vdiL2XdMWOeZ9XeQ/MJA3/nR06mNc4QisLIvUL3KuTbzscS5x5V5ZyiNI3ZBuqsFqncLuRYv/UYKfp3P6CtV4MmeLOEpCpb72Mn6nk1egUVMLwK+diMdqVLAmcnlgM55qwuSouZ23YCQbSf8zf6VJgZGagrm5RYppXBcyz4RB3faMAfnmmWbIdHdkP1NHdXXTsdvbQTSO06yeDGpYhVVgCQP8x/OlTMKm1Qz3TjxZD8R8h8h8hSuVqNBC6ffKWC7Vc4RwkVQNknid0P3x/Wr3G1QdwYdx6/hVoiTfft3Rh3w1VImLlogPCkAyYn5U/NfSustigyMvo/susW88TYR5BuX14OPrWSRtvQOKxvV5MW8ZMTArIpyDuA5HnUvZTgxYJpIPEmhZbpMvx3yK+5xxgfWvG7dnHnX0HsDU4w8jIuJFxwcOP2P7CvTfdPHlXiQhZon9SUP4/6gV6YkqfWmio7591i7+0e69ozZybTULuA/Txi3/fW7oRiQp6dq529z+68b3ddUtiebfXJgB/mjib/7ropP+aG9Risvqli2X3ZqdI81R+xUlXcnHcc1yN77V0Wh6Hst2QWvJ8fhEv8AU112SNuT2riz31rrd7ROlLHPMWmTSkf55sf9lP6es3Ii6g8US9eTmEKMVT2771RniJC34nj9gargcYHeqFuwcyykj4nIH0HH9DWkx4M5kr8Ad68b/SjOgWrczqpyT+FDYiK9xKsFk8pONoJzWO6Wgk8OechpymVXyiQ8kn0J71ca5esNJmUcAqcY71awBv4eun20YjZseK+clB/iPmx9KglLMvsSpYiVWJ1K6fbzBH8K/M+ZpXyW8W2UWemRGV4/vkeX1PrSmPt8rLHru8ExFEgkyBhvUede5owzA8B15U0pVlEDMe1z4bebyyu4AeVXmnzMVHyFKVAvjZI/hJmNsjOK95weO/zpSrCImUroH7LIVOGVd4+o5/pVUvkBhwGAIFKUeQR2N7ltw03s86oseyLrEUn5wD/xFdQIx+1lPIjP0pSs3rF76Rp9F+jErEk2z5+dcK++Ldmf28adCwOINDh/HMsppSndL/URH1P9F/c56mkMVnLMO6IWH5VShAjsYx2wgzjzpStD5M6UjJvBKjgetUZPh4J+fApSmsVEFq0jSGOHsHdR+oqSKBhJboxjihUeIy8M2fJf7o9T3pSoI/EySXCKhAgRILWKOP4dx44xSlKlY1H/2Q==" alt="Kishore Barik — Enterprise Engineer at Sails Software" width="80" height="80" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;display:block">
+    </div>
+    <div class="author-info">
+      <div class="author-role">Written by</div>
+      <div class="author-name">Kishore Barik</div>
+      <div class="author-title">Enterprise Engineer &nbsp;·&nbsp; Sails Software Inc.</div>
+      <div class="author-bio">Kishore is an enterprise engineer at Sails Software focused on frontend architecture, full-stack JavaScript systems, and helping engineering teams choose the right tools for the right problems. He writes about React ecosystem patterns, framework selection, and building scalable UI systems in production.</div>
+      <div class="author-links">
+        <a href="https://www.linkedin.com/in/kishorebarik/" class="author-link" target="_blank" rel="noopener noreferrer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://www.sailssoftware.com/blog" class="author-link" target="_blank" rel="noopener noreferrer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          More Articles
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="cta-sec reveal">
+  <div class="cta-blob"></div>
+  <h2>Ready to Modernise Your Enterprise React Stack?</h2>
+  <p>Sails Software helps enterprise engineering teams make architecture decisions that scale — from framework selection to governed AI-assisted development pipelines.</p>
+  <div class="cta-btns">
+    <a href="https://www.sailssoftware.com/contact-us" class="bp" target="_blank" rel="noopener noreferrer">Talk to Our Team <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="https://sailssoftware.com/" class="bs" target="_blank" rel="noopener noreferrer">Explore Our Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+  </div>
+</div>
+
+</div><!-- /#sails-react-blog -->
+
+<script>
+(function(){
+  var bar=document.getElementById('sails-react-progress');
+  if(bar){window.addEventListener('scroll',function(){var st=window.scrollY||document.documentElement.scrollTop,dh=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(dh>0?Math.min(st/dh*100,100):0)+'%';},{passive:true});}
+  var els=document.querySelectorAll('#sails-react-blog .reveal');
+  els.forEach(function(e){e.classList.add('jr');});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.remove('jr');en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.07,rootMargin:'0px 0px -32px 0px'});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.remove('jr');});}
+})();
+</script>
+</body>
+</html>
